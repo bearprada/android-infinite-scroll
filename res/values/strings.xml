@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">MainActivity</string>
+    <string name="title_activity_demo_grid">DemoGridActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_demo_list">DemoListActivity</string>
+    <string name="title_activity_demo_view_pager">DemoViewPagerActivity</string>
+
 </resources>
