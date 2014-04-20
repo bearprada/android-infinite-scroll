@@ -1,7 +1,7 @@
 android-infinite-scroll
 ======================
 
-This project is inspired by `infinite-scroll` (https://github.com/paulirish/infinite-scroll) for jQuery/Wordpress plugin. and also our product Pic Collage (pic-collage.com) from Cardinal Blue (http://cardinalblue.com) requires this UI component on socail feature. please try out it!
+This project is inspired by `infinite-scroll` (https://github.com/paulirish/infinite-scroll) for jQuery/Wordpress plugin. and also our product Pic Collage (http://pic-collage.com) from Cardinal Blue (http://cardinalblue.com) requires this UI component on socail feature. please try out it!
 
 this component can trigger event when move to the last item.
 

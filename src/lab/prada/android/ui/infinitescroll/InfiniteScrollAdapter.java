@@ -19,15 +19,15 @@ public class InfiniteScrollAdapter<T extends BaseAdapter> extends BaseAdapter {
 
     private final T mAdapter;
     private final View mProgressView;
-    private Vector<PullDownToRefreshListener> mListeners = new Vector<PullDownToRefreshListener>();
+    private Vector<InfiniteScrollListener> mListeners = new Vector<InfiniteScrollListener>();
     
     private final static int NONE_STATE = 0;
     private final static int REFRESHING_STATE = 1;
     private AtomicInteger state = new AtomicInteger(NONE_STATE);
     private boolean mCanReadMore = true;
 
-    public interface PullDownToRefreshListener {
-        public void pullDownToRefresh();
+    public interface InfiniteScrollListener {
+        public void onInfiniteScrolled();
     }
 
     public InfiniteScrollAdapter(Context context, T adapter, View progressView) {
@@ -134,8 +134,8 @@ public class InfiniteScrollAdapter<T extends BaseAdapter> extends BaseAdapter {
             if (isRefreshing() == false) {
                 state.set(REFRESHING_STATE);
                 if (mListeners != null) {
-                    for (PullDownToRefreshListener listener : mListeners) {
-                        listener.pullDownToRefresh();
+                    for (InfiniteScrollListener listener : mListeners) {
+                        listener.onInfiniteScrolled();
                     }
                 }
             }
@@ -152,13 +152,13 @@ public class InfiniteScrollAdapter<T extends BaseAdapter> extends BaseAdapter {
         return mAdapter;
     }
 
-    public void removeListener(PullDownToRefreshListener listener) {
+    public void removeListener(InfiniteScrollListener listener) {
         if (listener != null) {
 
         }
     }
 
-    public void addListener(PullDownToRefreshListener listener) {
+    public void addListener(InfiniteScrollListener listener) {
         if (listener != null && mListeners.contains(listener) == false) {
             mListeners.add(listener);
         }

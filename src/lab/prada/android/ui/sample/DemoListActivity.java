@@ -1,7 +1,7 @@
 package lab.prada.android.ui.sample;
 
 import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter;
-import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter.PullDownToRefreshListener;
+import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter.InfiniteScrollListener;
 import lab.prada.android.ui.readmore.R;
 import android.app.Activity;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.LinearLayout.LayoutParams;
 
-public class DemoListActivity extends Activity implements PullDownToRefreshListener {
+public class DemoListActivity extends Activity implements InfiniteScrollListener {
 
     private InfiniteScrollAdapter<SampleAdapter> mAdapter;
     private Handler mHandler;
@@ -45,7 +45,7 @@ public class DemoListActivity extends Activity implements PullDownToRefreshListe
     }
 
     @Override
-    public void pullDownToRefresh() {
+    public void onInfiniteScrolled() {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {

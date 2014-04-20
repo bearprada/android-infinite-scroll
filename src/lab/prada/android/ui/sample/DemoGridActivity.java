@@ -1,7 +1,7 @@
 package lab.prada.android.ui.sample;
 
 import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter;
-import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter.PullDownToRefreshListener;
+import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter.InfiniteScrollListener;
 import lab.prada.android.ui.readmore.R;
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.os.Handler;
 import android.view.Menu;
 import android.widget.GridView;
 
-public class DemoGridActivity extends Activity implements PullDownToRefreshListener {
+public class DemoGridActivity extends Activity implements InfiniteScrollListener {
 
     private static final int GRID_ITEM_HEIGHT = 128;
     private static final int GRID_ITEM_WIDTH = 128;
@@ -37,7 +37,7 @@ public class DemoGridActivity extends Activity implements PullDownToRefreshListe
     }
 
     @Override
-    public void pullDownToRefresh() {
+    public void onInfiniteScrolled() {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
