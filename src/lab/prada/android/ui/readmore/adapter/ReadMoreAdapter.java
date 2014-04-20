@@ -1,22 +1,19 @@
 package lab.prada.android.ui.readmore.adapter;
 
 import java.util.Vector;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import lab.prada.android.ui.readmore.R;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.os.Looper;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 public class ReadMoreAdapter<T extends BaseAdapter> extends BaseAdapter {
 
@@ -26,26 +23,30 @@ public class ReadMoreAdapter<T extends BaseAdapter> extends BaseAdapter {
     
     private final static int NONE_STATE = 0;
     private final static int REFRESHING_STATE = 1;
-    private int state = NONE_STATE;
-    
-    private final ThreadPoolExecutor tpe = new ThreadPoolExecutor(4, 16, 10, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+    private AtomicInteger state = new AtomicInteger(NONE_STATE);
+    private boolean mCanReadMore = true;
 
     public interface PullDownToRefreshListener {
         public void pullDownToRefresh();
     }
 
+    public ReadMoreAdapter(Context context, T adapter, View progressView) {
+        mAdapter = adapter;
+        mProgressView = progressView;
+    }
+
     public ReadMoreAdapter(Context context, T adapter, int itemWidth,
             int itemHeight) {
         mAdapter = adapter;
-        final LayoutInflater inflater = LayoutInflater.from(context);
-        LinearLayout progress = (LinearLayout) inflater.inflate(
-                R.layout.grid_item_progress, null);
-        progress.setLayoutParams(new GridView.LayoutParams(itemWidth,
+        RelativeLayout layout = new RelativeLayout(context);
+        layout.setLayoutParams(new GridView.LayoutParams(itemWidth,
                 itemHeight));
-        progress.setPadding(0, 0, 0, 0);
-        progress.setGravity(Gravity.CENTER);
-        progress.setVisibility(View.VISIBLE);
-        mProgressView = progress;
+        layout.setPadding(0, 0, 0, 0);
+        layout.setGravity(Gravity.CENTER);
+        layout.setVisibility(View.VISIBLE);
+        layout.addView(new ProgressBar(context));
+
+        mProgressView = layout;
     }
 
     public ReadMoreAdapter(T adapter, View progressView) {
@@ -133,17 +134,12 @@ public class ReadMoreAdapter<T extends BaseAdapter> extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (isProgressViewPosition(position)) {
             if (isRefreshing() == false) {
-                state = REFRESHING_STATE;
-                tpe.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (mListeners != null) {
-                            for (PullDownToRefreshListener listener : mListeners) {
-                                listener.pullDownToRefresh();
-                            }
-                        }
+                state.set(REFRESHING_STATE);
+                if (mListeners != null) {
+                    for (PullDownToRefreshListener listener : mListeners) {
+                        listener.pullDownToRefresh();
                     }
-                });
+                }
             }
             if (mProgressView.getVisibility() == View.GONE) {
                 mProgressView.setVisibility(View.VISIBLE);
@@ -175,18 +171,22 @@ public class ReadMoreAdapter<T extends BaseAdapter> extends BaseAdapter {
     }
 
     private boolean shouldShowProgressView() {
-        return mAdapter.getCount() > 0 /* && TextUtils.isEmpty(mNextPage) == false */;
+        return mAdapter.getCount() > 0 && mCanReadMore;
+    }
+
+    public void canReadMore(boolean enable) {
+        mCanReadMore  = enable;
     }
 
     public boolean isRefreshing() {
-        return state == REFRESHING_STATE;
+        return state.get() == REFRESHING_STATE;
     }
 
     public void handledRefresh() {
         assert(Looper.myLooper().equals(Looper.getMainLooper()));
         if (isRefreshing()) {
             mProgressView.setVisibility(View.GONE);
-            state = NONE_STATE;
+            state.set(NONE_STATE);
         }
     }
 
