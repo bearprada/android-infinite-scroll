@@ -1,4 +1,4 @@
-package lab.prada.android.ui.readmore.adapter;
+package lab.prada.android.ui.infinitescroll;
 
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -15,7 +15,7 @@ import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-public class ReadMoreAdapter<T extends BaseAdapter> extends BaseAdapter {
+public class InfiniteScrollAdapter<T extends BaseAdapter> extends BaseAdapter {
 
     private final T mAdapter;
     private final View mProgressView;
@@ -30,26 +30,24 @@ public class ReadMoreAdapter<T extends BaseAdapter> extends BaseAdapter {
         public void pullDownToRefresh();
     }
 
-    public ReadMoreAdapter(Context context, T adapter, View progressView) {
+    public InfiniteScrollAdapter(Context context, T adapter, View progressView) {
         mAdapter = adapter;
         mProgressView = progressView;
     }
 
-    public ReadMoreAdapter(Context context, T adapter, int itemWidth,
+    public InfiniteScrollAdapter(Context context, T adapter, int itemWidth,
             int itemHeight) {
         mAdapter = adapter;
         RelativeLayout layout = new RelativeLayout(context);
         layout.setLayoutParams(new GridView.LayoutParams(itemWidth,
                 itemHeight));
-        layout.setPadding(0, 0, 0, 0);
         layout.setGravity(Gravity.CENTER);
-        layout.setVisibility(View.VISIBLE);
         layout.addView(new ProgressBar(context));
 
         mProgressView = layout;
     }
 
-    public ReadMoreAdapter(T adapter, View progressView) {
+    public InfiniteScrollAdapter(T adapter, View progressView) {
         mAdapter = adapter;
         mProgressView = progressView;
     }

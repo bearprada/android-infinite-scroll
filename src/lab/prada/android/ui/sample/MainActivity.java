@@ -1,5 +1,6 @@
-package lab.prada.android.ui.readmore;
+package lab.prada.android.ui.sample;
 
+import lab.prada.android.ui.readmore.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,14 +25,6 @@ public class MainActivity extends Activity {
             public void onClick(View arg0) {
                 Intent intent = new Intent(MainActivity.this,
                         DemoGridActivity.class);
-                startActivity(intent);
-            }
-        });
-        findViewById(R.id.button3).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Intent intent = new Intent(MainActivity.this,
-                        DemoViewPagerActivity.class);
                 startActivity(intent);
             }
         });

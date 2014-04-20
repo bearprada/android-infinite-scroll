@@ -1,4 +1,4 @@
-package lab.prada.android.ui.readmore;
+package lab.prada.android.ui.sample;
 
 import android.content.Context;
 import android.view.View;

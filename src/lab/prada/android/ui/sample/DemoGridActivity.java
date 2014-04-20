@@ -1,7 +1,8 @@
-package lab.prada.android.ui.readmore;
+package lab.prada.android.ui.sample;
 
-import lab.prada.android.ui.readmore.adapter.ReadMoreAdapter;
-import lab.prada.android.ui.readmore.adapter.ReadMoreAdapter.PullDownToRefreshListener;
+import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter;
+import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter.PullDownToRefreshListener;
+import lab.prada.android.ui.readmore.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,7 +14,7 @@ public class DemoGridActivity extends Activity implements PullDownToRefreshListe
     private static final int GRID_ITEM_HEIGHT = 128;
     private static final int GRID_ITEM_WIDTH = 128;
     private GridView mGridView;
-    private ReadMoreAdapter<SampleAdapter> mAdapter;
+    private InfiniteScrollAdapter<SampleAdapter> mAdapter;
     private Handler mHandler;
     
     @Override
@@ -21,7 +22,7 @@ public class DemoGridActivity extends Activity implements PullDownToRefreshListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo_grid);
         mGridView = (GridView)findViewById(R.id.gridView1);
-        mAdapter = new ReadMoreAdapter<SampleAdapter>(this,
+        mAdapter = new InfiniteScrollAdapter<SampleAdapter>(this,
                 new SampleAdapter(this), GRID_ITEM_WIDTH, GRID_ITEM_HEIGHT);
         mAdapter.addListener(this);
         mGridView.setAdapter(mAdapter);

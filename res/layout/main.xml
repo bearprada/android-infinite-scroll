@@ -26,12 +26,6 @@
             android:layout_height="wrap_content"
             android:text="grid view" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="view pager" />
-
     </LinearLayout>
      
 </RelativeLayout>

@@ -1,7 +1,8 @@
-package lab.prada.android.ui.readmore;
+package lab.prada.android.ui.sample;
 
-import lab.prada.android.ui.readmore.adapter.ReadMoreAdapter;
-import lab.prada.android.ui.readmore.adapter.ReadMoreAdapter.PullDownToRefreshListener;
+import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter;
+import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter.PullDownToRefreshListener;
+import lab.prada.android.ui.readmore.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,7 +17,7 @@ import android.widget.LinearLayout.LayoutParams;
 
 public class DemoListActivity extends Activity implements PullDownToRefreshListener {
 
-    private ReadMoreAdapter<SampleAdapter> mAdapter;
+    private InfiniteScrollAdapter<SampleAdapter> mAdapter;
     private Handler mHandler;
 
     @Override
@@ -29,7 +30,7 @@ public class DemoListActivity extends Activity implements PullDownToRefreshListe
         progress.setGravity(Gravity.CENTER);
         progress.addView(new ProgressBar(this));
 
-        mAdapter = new ReadMoreAdapter<SampleAdapter>(this,
+        mAdapter = new InfiniteScrollAdapter<SampleAdapter>(this,
                 new SampleAdapter(this), progress);
         mAdapter.addListener(this);
         mHandler = new Handler();
