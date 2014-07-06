@@ -1,15 +1,15 @@
 package lab.prada.android.ui.infinitescroll.sample;
 
-import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter;
-import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter.InfiniteScrollListener;
-import lab.prada.android.ui.readmore.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.widget.GridView;
 
-public class DemoGridActivity extends Activity implements InfiniteScrollListener {
+import lab.prada.android.ui.lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter;
+import lab.prada.android.ui.mymodule.app.R;
+
+public class DemoGridActivity extends Activity implements InfiniteScrollAdapter.InfiniteScrollListener {
 
     private static final int GRID_ITEM_HEIGHT = 128;
     private static final int GRID_ITEM_WIDTH = 128;

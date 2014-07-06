@@ -1,11 +1,12 @@
 package lab.prada.android.ui.infinitescroll.sample;
 
-import lab.prada.android.ui.readmore.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import lab.prada.android.ui.mymodule.app.R;
 
 public class MainActivity extends Activity {
     @Override
