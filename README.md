@@ -5,6 +5,12 @@ This project is inspired by `infinite-scroll` (https://github.com/paulirish/infi
 
 this component can trigger event when move to the last item.
 
+DEMO
+====
+
+you can try it on Google Play Store
+
+https://play.google.com/store/apps/details?id=lab.prada.android.ui.mymodule.app
 
 Usage
 =====
