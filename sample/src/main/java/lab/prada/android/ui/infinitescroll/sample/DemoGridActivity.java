@@ -1,4 +1,4 @@
-package lab.prada.android.ui.sample;
+package lab.prada.android.ui.infinitescroll.sample;
 
 import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter;
 import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter.InfiniteScrollListener;

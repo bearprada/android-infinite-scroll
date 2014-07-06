@@ -1,18 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="lab.prada.android.ui.readmore"
-    android:versionCode="1"
-    android:versionName="1.0" >
-
-    <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="18" />
+    package="lab.prada.android.ui.mymodule.app">
 
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name="lab.prada.android.ui.sample.MainActivity"
+            android:name="lab.prada.android.ui.infinitescroll.sample.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,11 +14,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="lab.prada.android.ui.sample.DemoGridActivity"
+            android:name="lab.prada.android.ui.infinitescroll.sample.DemoGridActivity"
             android:label="@string/title_activity_demo_grid" >
         </activity>
         <activity
-            android:name="lab.prada.android.ui.sample.DemoListActivity"
+            android:name="lab.prada.android.ui.infinitescroll.sample.DemoListActivity"
             android:label="@string/title_activity_demo_list" >
         </activity>
         <activity

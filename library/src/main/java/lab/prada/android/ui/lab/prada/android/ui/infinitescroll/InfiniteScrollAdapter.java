@@ -1,7 +1,4 @@
-package lab.prada.android.ui.infinitescroll;
-
-import java.util.Vector;
-import java.util.concurrent.atomic.AtomicInteger;
+package lab.prada.android.ui.lab.prada.android.ui.infinitescroll;
 
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -14,6 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+
+import java.util.Vector;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class InfiniteScrollAdapter<T extends BaseAdapter> extends BaseAdapter {
 
@@ -36,7 +36,7 @@ public class InfiniteScrollAdapter<T extends BaseAdapter> extends BaseAdapter {
     }
 
     public InfiniteScrollAdapter(Context context, T adapter, int itemWidth,
-            int itemHeight) {
+                                 int itemHeight) {
         mAdapter = adapter;
         RelativeLayout layout = new RelativeLayout(context);
         layout.setLayoutParams(new GridView.LayoutParams(itemWidth,

@@ -1,4 +1,4 @@
-package lab.prada.android.ui.sample;
+package lab.prada.android.ui.infinitescroll.sample;
 
 import android.content.Context;
 import android.view.View;

@@ -1,4 +1,4 @@
-package lab.prada.android.ui.sample;
+package lab.prada.android.ui.infinitescroll.sample;
 
 import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter;
 import lab.prada.android.ui.infinitescroll.InfiniteScrollAdapter.InfiniteScrollListener;
@@ -8,12 +8,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.View;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.LinearLayout.LayoutParams;
 
 public class DemoListActivity extends Activity implements InfiniteScrollListener {
 
