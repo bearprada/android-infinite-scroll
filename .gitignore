@@ -7,3 +7,6 @@ gen/
 *.jar
 *.war
 *.ear
+
+build/
+.idea/
