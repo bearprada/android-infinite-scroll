@@ -7,6 +7,10 @@ def publicationVersion = providers.gradleProperty('versionName')
         .orElse('1.0.0-SNAPSHOT')
         .get()
 
+def signingKey = providers.gradleProperty('signingInMemoryKey')
+        .orElse('')
+        .get()
+
 def githubRepository = providers.gradleProperty('githubRepository')
         .orElse(providers.environmentVariable('GITHUB_REPOSITORY'))
         .orElse('bearprada/android-infinite-scroll')
@@ -36,7 +40,10 @@ android {
 mavenPublishing {
     coordinates('com.github.bearprada', 'android-infinite-scroll', publicationVersion)
     publishToMavenCentral(true)
-    signAllPublications()
+
+    if (!signingKey.isBlank()) {
+        signAllPublications()
+    }
 
     pom {
         name = 'Android Infinite Scroll'
