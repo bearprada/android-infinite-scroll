@@ -1,10 +1,11 @@
 plugins {
     id 'com.android.library'
-    id 'maven-publish'
+    id 'com.vanniktech.maven.publish'
 }
 
-group = 'com.github.bearprada'
-version = providers.gradleProperty('versionName').orElse('1.0.0-SNAPSHOT').get()
+def publicationVersion = providers.gradleProperty('versionName')
+        .orElse('1.0.0-SNAPSHOT')
+        .get()
 
 def githubRepository = providers.gradleProperty('githubRepository')
         .orElse(providers.environmentVariable('GITHUB_REPOSITORY'))
@@ -30,10 +31,38 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+}
 
-    publishing {
-        singleVariant('release') {
-            withSourcesJar()
+mavenPublishing {
+    coordinates('com.github.bearprada', 'android-infinite-scroll', publicationVersion)
+    publishToMavenCentral(true)
+    signAllPublications()
+
+    pom {
+        name = 'Android Infinite Scroll'
+        description = 'An adapter that triggers a callback when a ListView or GridView reaches its last item.'
+        url = 'https://github.com/bearprada/android-infinite-scroll'
+
+        licenses {
+            license {
+                name = 'Apache License, Version 2.0'
+                url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                distribution = 'repo'
+            }
+        }
+
+        developers {
+            developer {
+                id = 'bearprada'
+                name = 'PRADA Hsiung'
+                url = 'https://github.com/bearprada'
+            }
+        }
+
+        scm {
+            connection = 'scm:git:https://github.com/bearprada/android-infinite-scroll.git'
+            developerConnection = 'scm:git:ssh://git@github.com/bearprada/android-infinite-scroll.git'
+            url = 'https://github.com/bearprada/android-infinite-scroll'
         }
     }
 }
@@ -50,37 +79,6 @@ publishing {
                 password = providers.gradleProperty('gpr.key')
                         .orElse(providers.environmentVariable('GITHUB_TOKEN'))
                         .getOrElse('')
-            }
-        }
-    }
-
-    publications {
-        release(MavenPublication) {
-            groupId = project.group.toString()
-            artifactId = 'android-infinite-scroll'
-            version = project.version.toString()
-
-            pom {
-                name = 'Android Infinite Scroll'
-                description = 'An adapter that triggers a callback when a ListView or GridView reaches its last item.'
-                url = 'https://github.com/bearprada/android-infinite-scroll'
-
-                licenses {
-                    license {
-                        name = 'Apache License, Version 2.0'
-                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-
-                scm {
-                    connection = 'scm:git:https://github.com/bearprada/android-infinite-scroll.git'
-                    developerConnection = 'scm:git:ssh://git@github.com/bearprada/android-infinite-scroll.git'
-                    url = 'https://github.com/bearprada/android-infinite-scroll'
-                }
-            }
-
-            afterEvaluate {
-                from components.release
             }
         }
     }

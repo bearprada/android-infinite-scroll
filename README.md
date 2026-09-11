@@ -67,6 +67,20 @@ The published coordinates are:
 com.github.bearprada:android-infinite-scroll:1.0.0
 ```
 
+The same workflow also publishes release tags to Maven Central. Before using
+that destination, register the `com.github.bearprada` namespace in the
+Central Portal and configure a signing key. Add these GitHub Actions secrets:
+
+```
+MAVEN_CENTRAL_USERNAME
+MAVEN_CENTRAL_PASSWORD
+MAVEN_CENTRAL_SIGNING_KEY
+MAVEN_CENTRAL_SIGNING_KEY_PASSWORD
+```
+
+`MAVEN_CENTRAL_SIGNING_KEY` is the ASCII-armored private key exported for CI.
+Never commit any of these values.
+
 To consume it, add the GitHub Packages repository and credentials to the
 consumer project's Gradle configuration, then declare:
 
