@@ -1,27 +1,32 @@
-apply plugin: 'android'
+plugins {
+    id 'com.android.application'
+}
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion '19.1.0'
+    namespace = 'lab.prada.android.ui.mymodule.app'
+    compileSdk 37
+
     defaultConfig {
         applicationId 'lab.prada.android.ui.mymodule.app'
-        minSdkVersion 8
-        targetSdkVersion 19
+        minSdk 21
+        targetSdk 37
         versionCode 1
         versionName '1.0'
     }
+
     buildTypes {
         release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    productFlavors {
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:19.+'
-    compile project(':library')
+    implementation project(':library')
 }

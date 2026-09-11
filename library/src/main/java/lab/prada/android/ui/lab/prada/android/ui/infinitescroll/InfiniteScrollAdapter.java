@@ -154,7 +154,7 @@ public class InfiniteScrollAdapter<T extends BaseAdapter> extends BaseAdapter {
 
     public void removeListener(InfiniteScrollListener listener) {
         if (listener != null) {
-
+            mListeners.remove(listener);
         }
     }
 

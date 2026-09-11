@@ -1,12 +1,24 @@
-*.class
+# Local Android/Gradle configuration
+local.properties
+.gradle/
+
+# Build outputs
+build/
+*/build/
+
+# IDE files
+.idea/
+*.iml
 .project
 .classpath
+
+# Generated Android files
 bin/
 gen/
-# Package Files #
+*.class
+
+# Packaged artifacts
 *.jar
 *.war
 *.ear
-
-build/
-.idea/
+!gradle/wrapper/gradle-wrapper.jar
