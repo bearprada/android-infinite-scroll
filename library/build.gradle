@@ -1,6 +1,15 @@
 plugins {
     id 'com.android.library'
+    id 'maven-publish'
 }
+
+group = 'com.github.bearprada'
+version = providers.gradleProperty('versionName').orElse('1.0.0-SNAPSHOT').get()
+
+def githubRepository = providers.gradleProperty('githubRepository')
+        .orElse(providers.environmentVariable('GITHUB_REPOSITORY'))
+        .orElse('bearprada/android-infinite-scroll')
+        .get()
 
 android {
     namespace = 'lab.prada.android.ui.lab.prada.android.ui.infinitescroll'
@@ -20,5 +29,59 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
+    }
+
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = 'GitHubPackages'
+            url = uri("https://maven.pkg.github.com/${githubRepository.toLowerCase(Locale.ROOT)}")
+            credentials {
+                username = providers.gradleProperty('gpr.user')
+                        .orElse(providers.environmentVariable('GITHUB_ACTOR'))
+                        .getOrElse('')
+                password = providers.gradleProperty('gpr.key')
+                        .orElse(providers.environmentVariable('GITHUB_TOKEN'))
+                        .getOrElse('')
+            }
+        }
+    }
+
+    publications {
+        release(MavenPublication) {
+            groupId = project.group.toString()
+            artifactId = 'android-infinite-scroll'
+            version = project.version.toString()
+
+            pom {
+                name = 'Android Infinite Scroll'
+                description = 'An adapter that triggers a callback when a ListView or GridView reaches its last item.'
+                url = 'https://github.com/bearprada/android-infinite-scroll'
+
+                licenses {
+                    license {
+                        name = 'Apache License, Version 2.0'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:https://github.com/bearprada/android-infinite-scroll.git'
+                    developerConnection = 'scm:git:ssh://git@github.com/bearprada/android-infinite-scroll.git'
+                    url = 'https://github.com/bearprada/android-infinite-scroll'
+                }
+            }
+
+            afterEvaluate {
+                from components.release
+            }
+        }
     }
 }

@@ -1,0 +1,51 @@
+name: Publish Android library
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish, for example 1.0.0'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      PUBLISH_VERSION: ${{ inputs.version || github.ref_name }}
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build and publish release AAR
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${PUBLISH_VERSION#v}"
+          case "$VERSION" in
+            ''|*[!0-9A-Za-z._-]*)
+              echo "Invalid Maven version: $VERSION"
+              exit 1
+              ;;
+          esac
+          ./gradlew clean check :library:publishReleasePublicationToGitHubPackagesRepository \
+            --no-daemon \
+            -PversionName="$VERSION"

@@ -54,6 +54,31 @@ mAdapter.setListener(new PullDownToRefreshListener() {
 });
 ```
 
+Maven package
+-------------
+
+The library is published as an AAR to GitHub Packages by the
+`Publish Android library` workflow. Push a version tag such as `v1.0.0`, or
+run the workflow manually with a version.
+
+The published coordinates are:
+
+```
+com.github.bearprada:android-infinite-scroll:1.0.0
+```
+
+To consume it, add the GitHub Packages repository and credentials to the
+consumer project's Gradle configuration, then declare:
+
+```
+implementation 'com.github.bearprada:android-infinite-scroll:1.0.0'
+```
+
+GitHub Packages requires authentication for Maven/Gradle packages. Use a
+classic personal access token with `read:packages` for local consumers, and
+keep it in `~/.gradle/gradle.properties` or environment variables rather than
+committing it.
+
 Screenshot
 ==========
 
