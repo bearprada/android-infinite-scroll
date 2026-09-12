@@ -3,8 +3,8 @@ package lab.prada.android.ui.infinitescroll.sample;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.Gravity;
-import android.view.Menu;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -24,22 +24,16 @@ public class DemoListActivity extends Activity implements InfiniteScrollAdapter.
         setContentView(R.layout.activity_demo_list);
 
         RelativeLayout progress = new RelativeLayout(this);
-        progress.setLayoutParams(new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, 100));
+        progress.setLayoutParams(new GridView.LayoutParams(
+                GridView.LayoutParams.MATCH_PARENT, 100));
         progress.setGravity(Gravity.CENTER);
         progress.addView(new ProgressBar(this));
 
         mAdapter = new InfiniteScrollAdapter<SampleAdapter>(this,
                 new SampleAdapter(this), progress);
         mAdapter.addListener(this);
-        mHandler = new Handler();
-
-        ((ListView)this.findViewById(R.id.listView)).setAdapter(mAdapter);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.demo_list, menu);
-        return true;
+        mHandler = new Handler(Looper.getMainLooper());
+        ((ListView) findViewById(R.id.listView)).setAdapter(mAdapter);
     }
 
     @Override
@@ -52,5 +46,4 @@ public class DemoListActivity extends Activity implements InfiniteScrollAdapter.
             }
         }, 3000);
     }
-
 }
