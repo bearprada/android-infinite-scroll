@@ -38,7 +38,7 @@ android {
 }
 
 mavenPublishing {
-    coordinates('com.github.bearprada', 'android-infinite-scroll', publicationVersion)
+    coordinates('io.github.bearprada', 'android-infinite-scroll', publicationVersion)
     publishToMavenCentral(true)
 
     if (!signingKey.isBlank()) {
