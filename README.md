@@ -64,11 +64,11 @@ run the workflow manually with a version.
 The published coordinates are:
 
 ```
-com.github.bearprada:android-infinite-scroll:1.0.0
+io.github.bearprada:android-infinite-scroll:1.0.0
 ```
 
 The same workflow also publishes release tags to Maven Central. Before using
-that destination, register the `com.github.bearprada` namespace in the
+that destination, register the `io.github.bearprada` namespace in the
 Central Portal and configure a signing key. Add these GitHub Actions secrets:
 
 ```
@@ -85,7 +85,7 @@ To consume it, add the GitHub Packages repository and credentials to the
 consumer project's Gradle configuration, then declare:
 
 ```
-implementation 'com.github.bearprada:android-infinite-scroll:1.0.0'
+implementation 'io.github.bearprada:android-infinite-scroll:1.0.0'
 ```
 
 GitHub Packages requires authentication for Maven/Gradle packages. Use a
